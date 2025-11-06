@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — NextLayer WebCrafters</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animations.css">
+  <style>
+  .container{max-width:1100px;margin:0 auto;padding:18px;box-sizing:border-box}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+  .brand{display:flex;align-items:center;gap:12px}.brand img{width:56px;height:56px;object-fit:cover;border-radius:6px}
+  nav{display:flex;gap:14px;flex-wrap:wrap}
+
+  .contact-wrap{display:flex;gap:24px;align-items:flex-start;margin:20px 0}
+  .contact-info{flex:1;min-width:220px}
+  .contact-form{flex:1;min-width:260px;background:#fff;padding:16px;border-radius:10px;box-shadow:0 6px 18px rgba(5,10,20,0.06)}
+  .contact-form input,.contact-form textarea{width:100%;box-sizing:border-box}
+
+  @media (max-width:800px){
+    header{flex-direction:column;align-items:stretch}
+    nav{justify-content:center}
+    .contact-wrap{flex-direction:column;gap:12px}
+    .contact-form,.contact-info{width:100%}
+    .brand img{width:48px;height:48px}
+    footer{flex-direction:column;gap:8px;text-align:center}
+  }
+
+  @media (max-width:420px){
+    .contact-form textarea{min-height:120px}
+    .container{padding:12px}
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+       <img src="logo.png" alt="NextLayer WebCrafters Logo" width="60" height="60">
+        <div>
+          <h1>NextLayer WebCrafters</h1>
+          <p class="tagline">Creative Frontend Studio</p>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="card">
+        <h1>Let's Build Something Amazing!</h1>
+        <p class="muted">Reach us directly via WhatsApp or send us your project idea. We respond fast!</p>
+        <a href="https://wa.me/923132378094?text=Hi!%20I%20want%20to%20discuss%20a%20project." class="cta">Message on WhatsApp</a>
+      </div>
+      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600" alt="Contact">
+    </section>
+
+    <footer>
+      <span>© 2025 NextLayer WebCrafters</span>
+      <span>Always Online to Help</span>
+    </footer>
+  </div>
+
+  <a href="https://wa.me/923132378094" class="whatsapp-float" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="34" height="34" alt="WhatsApp">
+  </a>
+    <div id="whatsapp-popup" style="position:fixed;right:24px;bottom:90px;background:#fff;color:#222;padding:16px 22px;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,0.18);z-index:999;display:flex;align-items:center;gap:12px;font-size:16px;">
+    <span>Chat with us on WhatsApp!</span>
+    <button onclick="document.getElementById('whatsapp-popup').style.display='none'" style="background:none;border:none;font-size:18px;cursor:pointer;">×</button>
+  </div>
+  <script>
+    window.onload = function() {
+      document.getElementById('whatsapp-popup').style.display = 'flex';
+    };
+    // Responsive adjustment for mobile
+    if (window.matchMedia("(max-width: 600px)").matches) {
+      document.getElementById('whatsapp-popup').style.right = '12px';
+      document.getElementById('whatsapp-popup').style.bottom = '62px';
+      document.getElementById('whatsapp-popup').style.fontSize = '14px';
+      document.getElementById('whatsapp-popup').style.padding = '10px 14px';
+    }
+  </script>
+</body>
+</html>

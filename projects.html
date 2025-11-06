@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — NextLayer WebCrafters</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animations.css">
+
+  <!-- Added: lightweight carousel & animation styles -->
+  <style>
+    /* Container/header entrance */
+    header { animation: slideDown .6s ease both; }
+    @keyframes slideDown { from { transform: translateY(-8px); opacity: 0 } to { transform: none; opacity: 1 } }
+
+    /* Carousel layout */
+    .projects-slider { position: relative; margin: 28px 0 48px; overflow: hidden; }
+    .slides-wrapper { overflow: hidden; }
+    .slides { display: flex; gap: 18px; transition: transform .5s cubic-bezier(.22,.9,.28,1); will-change: transform; padding: 6px; }
+    .slide { min-width: 320px; max-width: 420px; flex: 0 0 auto; background:#fff;border-radius:12px;box-shadow:0 6px 18px rgba(5,10,20,0.08); overflow:hidden; text-decoration:none; color:inherit; transform-origin:center; transition: transform .28s ease, box-shadow .28s ease; }
+    .slide video {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    .slide h3 { margin:12px 14px 6px; font-size:1.05rem; }
+    .slide .muted { margin:0 14px 14px; font-size:.92rem; color:#666; }
+
+    /* Hover / focus effects */
+    .slide:hover, .slide:focus { transform: translateY(-6px) scale(1.02); box-shadow:0 12px 30px rgba(5,10,30,0.12); outline: none; }
+
+    /* Navigation buttons */
+    .slider-btn { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); color:#fff; border:none; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:6; }
+    .slider-btn.prev { left:8px; }
+    .slider-btn.next { right:8px; }
+    .slider-btn:focus { box-shadow:0 0 0 4px rgba(0,122,255,0.12); }
+
+    /* Dots */
+    .dots { display:flex; gap:8px; justify-content:center; margin-top:14px; }
+    .dot { width:10px; height:10px; border-radius:50%; background:#ddd; cursor:pointer; transition: background .2s; }
+    .dot.active { background:#111; }
+
+    /* Responsive helpers */
+    .container{max-width:1100px;margin:0 auto;padding:18px;box-sizing:border-box}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:12px}.brand img{width:56px;height:56px;object-fit:cover;border-radius:6px}
+    nav{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+
+    /* Carousel / grid responsiveness */
+    .projects-slider{margin:20px 0;overflow:visible}
+    .slides-wrapper{overflow:hidden}
+    .slides{display:flex;gap:18px;padding:6px;transition:transform .45s ease}
+    .slide{min-width:320px;max-width:420px;flex:0 0 auto}
+    .slide img,.slide video{width:100%;height:180px;object-fit:cover;display:block;border-radius:6px 6px 0 0}
+    .slider-btn{width:40px;height:40px}
+    .dots{margin-top:12px}
+
+    /* Small screens */
+    @media (max-width:900px){
+      .slide{min-width:280px;max-width:340px}
+      .slide img,.slide video{height:150px}
+    }
+    @media (max-width:800px){
+      header{flex-direction:column;align-items:stretch}
+      nav{justify-content:center}
+      .projects-slider{margin:16px 0}
+      .slides{gap:12px}
+      .slide{min-width:80%;max-width:80%}
+      .slide img,.slide video{height:160px}
+      .slider-btn{width:36px;height:36px}
+      .dots{gap:8px}
+    }
+    @media (max-width:420px){
+      .slide img,.slide video{height:140px}
+      .brand img{width:48px;height:48px}
+    }
+
+    /* WhatsApp popup responsive */
+    .whatsapp-float{position:fixed;right:24px;bottom:24px;z-index:999}
+    #whatsapp-popup{right:24px;bottom:90px}
+    @media (max-width:600px){
+      #whatsapp-popup{right:12px;bottom:62px;font-size:14px;padding:10px 14px}
+      .whatsapp-float{right:12px;bottom:12px}
+    }
+
+    /* WhatsApp popup animation */
+    #whatsapp-popup { transform-origin:100% 100%; animation: popupIn .45s ease both; }
+    @keyframes popupIn { from { transform: translateY(8px) scale(.98); opacity: 0 } to { transform: none; opacity: 1 } }
+    #whatsapp-popup.hide { animation: popupOut .28s ease both; }
+    @keyframes popupOut { from { opacity:1; transform:none } to { opacity:0; transform: translateY(8px) scale(.98) } }
+
+    /* Header / nav responsive */
+    header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0; }
+    .brand { display:flex; align-items:center; gap:12px; }
+    .brand img { width:56px; height:56px; object-fit:cover; border-radius:6px; }
+    nav { display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+
+    /* Support video inside slide */
+    .slide img, .slide video { width:100%; height:180px; object-fit:cover; display:block; }
+    @media (max-width:900px) {
+      .slide { min-width:280px; max-width:340px; }
+      .slide img, .slide video { height:150px; }
+    }
+    @media (max-width:600px) {
+      .slider-btn { width:36px; height:36px; }
+      .slide { min-width:88%; max-width:88%; }
+    }
+
+    /* Make body components stack on small screens */
+    @media (max-width:800px) {
+      header { flex-direction:column; align-items:stretch; }
+      nav { justify-content:center; }
+      .projects-slider { margin:18px 0 32px; }
+      .slides { gap:12px; padding:6px; }
+      .slides-wrapper { padding-bottom:6px; }
+      .slide img, .slide video { height:160px; }
+    }
+    @media (max-width:420px) {
+      .slide img, .slide video { height:140px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+       <img src="logo.png" alt="NextLayer WebCrafters Logo" width="60" height="60">
+        <div>
+          <h1>NextLayer WebCrafters</h1>
+          <p class="tagline">Creative Frontend Studio</p>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html" class="active">Projects</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <h1>Our Recent Front-end But Still Proper Working Projects</h1>
+
+    <!-- Replaced: original .projects grid with a slider -->
+    <div class="projects-slider" aria-label="Project carousel">
+      <button class="slider-btn prev" aria-label="Previous project">‹</button>
+      <div class="slides-wrapper" tabindex="0">
+        <div class="slides">
+          <!-- Slide 1 -->
+          <div class="slide">
+            <video autoplay loop muted playsinline>
+              <source src="GlowAura.mp4" type="video/mp4">
+            </video>
+            <h3>NextLayer WebCrafters - GlowAura</h3>
+            <p class="muted">GlowAura — where beauty meets confidence through premium, skin-loving cosmetic essentials.</p>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="slide">
+            <video autoplay loop muted playsinline>
+              <source src="GrowthNest.mp4" type="video/mp4">
+            </video>
+            <h3>NextLayer WebCrafters - GrowthNest</h3>
+            <p class="muted">GrowthNest — your one-stop destination for smart, stylish, and affordable online shopping.</p>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="slide">
+            <video autoplay loop muted playsinline>
+              <source src="buisness_landing_page.mp4" type="video/mp4">
+            </video>
+            <h3>NextLayer WebCrafters - Landing Page</h3>
+            <p class="muted">NextLayer WebCrafters — transforming ideas into stunning, high-performing digital experiences.</p>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="slide">
+            <video autoplay loop muted playsinline>
+              <source src="Prime Cart.mp4" type="video/mp4">
+            </video>
+            <h3>NextLayer WebCrafters - PrimeCart</h3>
+            <p class="muted">PrimeCart — delivering quality products and seamless shopping right to your doorstep.</p>
+          </div>
+
+           <!-- Slide 5 -->
+          <div class="slide">
+            <video autoplay loop muted playsinline>
+              <source src="GTA.mp4" type="video/mp4">
+            </video>
+            <h3>NextLayer WebCrafters - GTA VI</h3>
+            <p class="muted">GTA VI — A professionally designed GTA VI information platform delivering verified updates, news, and community insights.
+Built with a clean UI, optimized performance, and a seamless user experience for gaming enthusiasts.</p>
+          </div>
+        </div>
+      </div>
+      <button class="slider-btn next" aria-label="Next project">›</button>
+
+      <div class="dots" aria-hidden="false"></div>
+    </div>
+
+    <footer>
+      <span>© 2025 NextLayer WebCrafters</span>
+      <span>Every Pixel Matters</span>
+    </footer>
+  </div>
+
+  <!-- ...existing WhatsApp markup ... -->
+  <a href="https://wa.me/923132378094" class="whatsapp-float" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="34" height="34" alt="WhatsApp">
+  </a>
+  <div id="whatsapp-popup" style="position:fixed;right:24px;bottom:90px;background:#fff;color:#222;padding:16px 22px;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,0.18);z-index:999;display:flex;align-items:center;gap:12px;font-size:16px;">
+    <span>Chat with us on WhatsApp!</span>
+    <button id="whatsapp-close" style="background:none;border:none;font-size:18px;cursor:pointer;">×</button>
+  </div>
+
+  <!-- Replaced: old inline script with unified carousel + popup script -->
+  <script>
+    (function(){
+      // Elements
+      const slider = document.querySelector('.projects-slider');
+      if (!slider) return;
+      const slidesEl = slider.querySelector('.slides');
+      const slides = Array.from(slidesEl.children);
+      const prevBtn = slider.querySelector('.slider-btn.prev');
+      const nextBtn = slider.querySelector('.slider-btn.next');
+      const dotsWrap = slider.querySelector('.dots');
+
+      // State
+      let index = 0;
+
+      // Build dots as indicators only (non-clickable)
+      slides.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'dot';
+        d.setAttribute('aria-label', 'Slide ' + (i + 1));
+        d.disabled = true; // make non-interactive so navigation only occurs via buttons
+        dotsWrap.appendChild(d);
+      });
+      const dots = Array.from(dotsWrap.children);
+
+      function update() {
+        if (!slides[0]) return;
+        const gap = parseFloat(getComputedStyle(slidesEl).gap) || 18;
+        const slideWidth = slides[0].getBoundingClientRect().width + gap;
+        const offset = index * slideWidth;
+        slidesEl.style.transform = `translateX(${-offset}px)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+      }
+
+      function goTo(i) {
+        index = Math.max(0, Math.min(i, slides.length - 1));
+        update();
+      }
+
+      function next() { goTo((index + 1) % slides.length); }
+      function prev() { goTo((index - 1 + slides.length) % slides.length); }
+
+      // Only allow button clicks to navigate
+      if (prevBtn) prevBtn.addEventListener('click', prev);
+      if (nextBtn) nextBtn.addEventListener('click', next);
+
+      // Initial setup
+      window.addEventListener('load', () => { index = 0; update(); });
+      window.addEventListener('resize', update);
+    })();
+  </script>
+
+  <!-- Play videos only on hover/focus; tap toggles on touch devices. -->
+  <script>
+    (function(){
+      const videos = document.querySelectorAll('.projects-slider video, .projects .project video, .slide video');
+      if (!videos.length) return;
+
+      videos.forEach((v) => {
+        // Ensure muted and inline play so browsers allow programmatic play
+        try { v.muted = true; } catch(e){}
+        v.playsInline = true;
+        v.removeAttribute && v.removeAttribute('autoplay');
+        v.pause && v.pause();
+
+        // Pointer events (covers mouse and pen)
+        v.addEventListener('pointerenter', () => {
+          // only react to actual pointer (not synthetic)
+          v.play().catch(()=>{ /* ignore play errors */ });
+        });
+        v.addEventListener('pointerleave', () => {
+          if (!v.paused) {
+            v.pause();
+            v.currentTime = 0;
+          }
+        });
+
+        // Keyboard accessibility
+        v.setAttribute('tabindex', v.getAttribute('tabindex') || '0');
+        v.addEventListener('focus', () => v.play().catch(()=>{}));
+        v.addEventListener('blur', () => { v.pause(); v.currentTime = 0; });
+
+        // Touch: toggle play/pause on tap for devices that lack hover
+        v.addEventListener('click', (e) => {
+          const hasHover = window.matchMedia && window.matchMedia('(hover: hover)').matches;
+          if (!hasHover) {
+            if (v.paused) v.play().catch(()=>{});
+            else { v.pause(); v.currentTime = 0; }
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
