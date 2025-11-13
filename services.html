@@ -7,31 +7,28 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="animations.css">
   <style>
-  /* Container and layout adjustments */
   .container{max-width:1100px;margin:0 auto;padding:18px;box-sizing:border-box}
   header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
-  .brand{display:flex;align-items:center;gap:12px}.brand img{width:56px;height:56px;object-fit:cover;border-radius:6px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand img{width:56px;height:56px;object-fit:cover;border-radius:6px}
   nav{display:flex;gap:14px;flex-wrap:wrap}
-
-  /* Services grid for responsive cards */
   .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:22px 0}
   .service{padding:16px;border-radius:10px;box-shadow:0 6px 18px rgba(5,10,20,0.06);background:#fff}
-
-  /* Service card description color (updated) */
-  .service p { color: #333333; }
-
-  /* Service card heading color */
-  .service h3 { color: #1a1a1a; }
-
-  /* Responsive adjustments for mobile */
+  .service p{color:#333}
+  .service h3{color:#1a1a1a}
+  .nav-toggle{display:none;background:none;border:none;font-size:2rem;cursor:pointer;color:inherit;text-align:right}
+  @media (max-width:800px){
+    .nav-toggle{display:block}
+    nav{display:none;flex-direction:column;width:100%;margin-top:12px;background:#111;position:relative;z-index:100}
+    nav.open{display:flex}
+    nav a{padding:12px 0;text-align:center;color:#fff;border-bottom:1px solid #333}
+  }
   @media (max-width:800px){
     header{flex-direction:column;align-items:stretch}
-    nav{justify-content:center}
     .services-grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
     footer{flex-direction:column;gap:8px;text-align:center}
     .brand img{width:48px;height:48px}
   }
-
   @media (max-width:420px){
     .services-grid{grid-template-columns:1fr}
   }
@@ -39,15 +36,15 @@
 </head>
 <body>
   <div class="container">
-    <!-- Header -->
     <header>
       <div class="brand">
-       <img src="logo.png" alt="NextLayer WebCrafters Logo" width="60" height="60">
+        <img src="logo.png" alt="NextLayer WebCrafters Logo">
         <div>
           <h1>NextLayer WebCrafters</h1>
           <p class="tagline">Creative Frontend Studio</p>
         </div>
       </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
       <nav>
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -60,113 +57,136 @@
     <h1>Our Services & Packages</h1>
 
     <div class="projects services-grid">
-      <!-- 1. Starter Website Package -->
+      <!-- 1 -->
       <div class="project service">
-        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600" alt="Starter Website Package">
-        <h3>Starter Website Package</h3>
+        <img src="https://i.pinimg.com/736x/e8/cb/8b/e8cb8bfb9e8392d8cee710f6efeb7605.jpg" alt="Web Development">
+        <h3>Custom Website Development</h3>
         <p>
-          - Single-page responsive business website (WordPress)<br>
-          - Hero banner, about, services, and contact form<br>
-          - WhatsApp button + basic SEO setup<br>
-          - 7 days delivery time<br>
-          - Ideal for startups and small businesses
+          - Fully responsive, fast-loading business websites<br>
+          - Built using <strong>HTML, CSS, JavaScript, TypeScript, .NET, and C#</strong><br>
+          - Backend integration with <strong>SQL Server</strong><br>
+          - Optimized for SEO and mobile performance
         </p>
       </div>
 
-      <!-- 2. 5-Page Business Website + Lead Guarantee -->
+      <!-- 2 -->
       <div class="project service">
-        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600" alt="5-Page Business Website">
-        <h3>5-Page Business Website + Lead Guarantee</h3>
+        <img src="https://i.pinimg.com/736x/c6/07/43/c607435eea77306df3a12d5c16820a0c.jpg" alt="WordPress">
+        <h3>WordPress Design & Development</h3>
         <p>
-          - 5 responsive pages (Home, About, Services, Packages, Contact)<br>
-          - Contact form, WhatsApp integration & call tracking<br>
-          - Google My Business setup + on-page SEO<br>
-          - 1-month Facebook/Google Ads campaign management<br>
-          - Lead Guarantee: Minimum 20 qualified leads in 60 days<br>
-          - Monthly reporting & performance tracking
+          - Professional business & eCommerce sites<br>
+          - Custom themes, plugins, and WooCommerce setup<br>
+          - Blog, portfolio, and product websites<br>
+          - SEO optimization & speed tuning
         </p>
       </div>
 
-      <!-- 3. Premium / Ecommerce Package -->
+      <!-- 3 -->
       <div class="project service">
-        <img src="https://mlmht7f2dsrp.i.optimole.com/w:1920/h:1080/q:mauto/f:best/https://savycoder.com/wp-content/uploads/2024/11/easypaisa-payment-gateway.jpg" alt="Premium Ecommerce Package">
-        <h3>Premium / Ecommerce Package</h3>
+        <img src="https://i.pinimg.com/1200x/32/07/84/3207849c56d453d02019c3b3ac2510c9.jpg" alt="ASP.NET Development">
+        <h3>ASP.NET & C# Web Applications</h3>
         <p>
-          - Up to 10 pages or e-commerce store setup<br>
-          - Payment gateway integration (JazzCash, Easypaisa, etc.)<br>
-          - Product management training for client<br>
-          - 2-month marketing campaign with stronger lead target<br>
-          - High-performance hosting & speed optimization
+          - Secure and scalable web applications<br>
+          - Custom dashboards, admin panels, and CRM systems<br>
+          - Data management with SQL Server<br>
+          - Full-stack .NET development with API integration
         </p>
       </div>
 
-      <!-- 4. Elite Business Suite -->
+      <!-- 4 -->
       <div class="project service">
-        <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600" alt="Elite Business Suite">
-        <h3>Elite Business Suite (PKR 180,000)</h3>
+        <img src="https://i.pinimg.com/736x/2e/6f/fc/2e6ffc7bb424ef561c1001111f222474.jpg" alt="UI UX Design">
+        <h3>UI/UX Design</h3>
         <p>
-          A complete digital growth package including a responsive business website, SEO, and targeted ad campaigns with guaranteed leads.<br><br>
-          Comes with CRM integration and automation tools for tracking, follow-ups, and sales — a full system that grows your business 24/7.
+          - Modern, clean, and conversion-driven designs<br>
+          - Figma prototypes & wireframes<br>
+          - Mobile-first responsive design<br>
+          - Focused on smooth user experience
         </p>
       </div>
 
-      <!-- 5. Add-ons / Optional Services -->
+      <!-- 5 -->
       <div class="project service">
-        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600" alt="Add-ons Services">
-        <h3>Add-ons / Optional Services</h3>
+        <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051?w=600" alt="SEO Services">
+        <h3>Search Engine Optimization (SEO)</h3>
         <p>
-          - Monthly SEO Package — $100/month<br>
-          - WhatsApp Automation + CRM Integration — $55<br>
-          - Content Writing & Photography — Custom quote<br>
-          - Website Maintenance & Hosting — $50/month
+          - On-page optimization (tags, speed, content)<br>
+          - Off-page SEO & backlinks<br>
+          - Google My Business setup<br>
+          - Monthly keyword reports & growth tracking
         </p>
       </div>
 
-      <!-- 6. Ad Management System Setup -->
+      <!-- 6 -->
       <div class="project service">
-        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600" alt="Ad Management System">
-        <h3>Ad Management System Setup (Included in Packages)</h3>
+        <img src="https://i.pinimg.com/736x/a6/3f/51/a63f51517bd4f6b51b099a4b37641914.jpg" alt="Content Writing">
+        <h3>Content Writing & Brand Copy</h3>
         <p>
-          <strong>Overview:</strong> Our Ad Management System helps businesses generate and manage real, trackable leads with minimum effort. 
-          From campaign creation to reporting, we handle everything for visible results and guaranteed leads.
+          - SEO-focused blog and website content<br>
+          - Engaging ad copy and product descriptions<br>
+          - Brand storytelling that attracts and converts<br>
+          - Proofreading & optimization for tone and clarity
         </p>
+      </div>
+
+      <!-- 7 -->
+      <div class="project service">
+        <img src="https://i.pinimg.com/736x/be/09/d9/be09d9bda3bfdd4d932d376c09c6fd89.jpg" alt="Maintenance">
+        <h3>Website Maintenance & Optimization</h3>
         <p>
-          <strong>What’s Included:</strong><br>
-          • Account Setup & Tracking Integration — Facebook/Google Ads, pixel & conversion setup<br>
-          • Ad Design & Campaign Launch — engaging visuals & optimized targeting<br>
-          • Monitoring & Optimization — daily/alternate performance checks for best ROI<br>
-          • Weekly Reporting & Lead Tracking — full transparency with cost per lead (CPL)<br>
-          • CRM & Automation — optional upgrade with auto-responses and reminders
+          - Monthly updates and security checks<br>
+          - Bug fixes, speed improvements & backups<br>
+          - Hosting & SSL management<br>
+          - Long-term performance monitoring
+        </p>
+      </div>
+
+      <!-- 8 -->
+      <div class="project service">
+        <img src="https://i.pinimg.com/1200x/20/51/62/205162edcafcfac646388158303bb48d.jpg" alt="Ecommerce">
+        <h3>E-Commerce Solutions</h3>
+        <p>
+          - Online stores built with WordPress or .NET<br>
+          - Secure payment integration (JazzCash, Easypaisa, PayPal)<br>
+          - Product management & order tracking<br>
+          - Optimized checkout & conversion-focused design
         </p>
       </div>
     </div>
 
-    <!-- Footer -->
     <footer>
       <span>© 2025 NextLayer WebCrafters</span>
       <span>We Build Growth-Driven Websites</span>
     </footer>
   </div>
 
-  <!-- Floating WhatsApp Icon -->
-  <a href="https://wa.me/923132378094?text=Hi!%20I'm%20interested%20in%20NextLayer%20WebCrafters%20Services" class="whatsapp-float" target="_blank">
+  <a href="https://wa.me/923462740115?text=Hi!%20I'm%20interested%20in%20NextLayer%20WebCrafters%20Services" class="whatsapp-float" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="34" height="34" alt="WhatsApp">
   </a>
-    <div id="whatsapp-popup" style="position:fixed;right:24px;bottom:90px;background:#fff;color:#222;padding:16px 22px;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,0.18);z-index:999;display:flex;align-items:center;gap:12px;font-size:16px;">
+  <div id="whatsapp-popup" style="position:fixed;right:24px;bottom:90px;background:#fff;color:#222;padding:16px 22px;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,0.18);z-index:999;display:flex;align-items:center;gap:12px;font-size:16px;">
     <span>Chat with us on WhatsApp!</span>
     <button onclick="document.getElementById('whatsapp-popup').style.display='none'" style="background:none;border:none;font-size:18px;cursor:pointer;">×</button>
   </div>
+
   <script>
-    window.onload = function() {
-      document.getElementById('whatsapp-popup').style.display = 'flex';
-    };
-    // Responsive adjustment for mobile
-    if (window.matchMedia("(max-width: 600px)").matches) {
-      document.getElementById('whatsapp-popup').style.right = '12px';
-      document.getElementById('whatsapp-popup').style.bottom = '62px';
-      document.getElementById('whatsapp-popup').style.fontSize = '14px';
-      document.getElementById('whatsapp-popup').style.padding = '10px 14px';
-    }
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('header nav');
+    toggle.addEventListener('click', () => nav.classList.toggle('open'));
+    nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      if (window.innerWidth <= 800) nav.classList.remove('open');
+    }));
+  });
+  window.onload = function() {
+    document.getElementById('whatsapp-popup').style.display = 'flex';
+  };
+  if (window.matchMedia("(max-width: 600px)").matches) {
+    const wp = document.getElementById('whatsapp-popup');
+    wp.style.right = '12px';
+    wp.style.bottom = '62px';
+    wp.style.fontSize = '14px';
+    wp.style.padding = '10px 14px';
+  }
   </script>
 </body>
 </html>

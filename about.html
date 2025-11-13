@@ -10,10 +10,23 @@
     .container { max-width:1100px; margin:0 auto; padding:18px; box-sizing:border-box; }
 
     /* Header */
-    header { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0; position:relative; }
     .brand { display:flex; align-items:center; gap:12px; }
     .brand img { width:56px; height:56px; object-fit:cover; border-radius:6px; }
     nav { display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+    nav a { padding:8px 10px; text-decoration:none; color:inherit; border-radius:6px; transition:background 0.2s; }
+    nav a:hover { background:rgba(255,255,255,0.1); }
+
+    /* ✅ Nav Toggle Button */
+    .nav-toggle {
+      display:none;
+      background:none;
+      border:none;
+      font-size:2rem;
+      cursor:pointer;
+      margin-left:auto;
+      color:inherit;
+    }
 
     /* Hero Section */
     .hero { display:flex; gap:20px; align-items:flex-start; margin:26px 0; }
@@ -55,9 +68,7 @@
       z-index:1000;
       transition:transform 0.3s ease;
     }
-    .whatsapp-float:hover {
-      transform:scale(1.05);
-    }
+    .whatsapp-float:hover { transform:scale(1.05); }
     .whatsapp-float img {
       width:32px;
       height:32px;
@@ -95,8 +106,26 @@
     }
 
     @media (max-width: 800px) {
-      header { flex-direction:column; align-items:stretch; }
-      nav { width:100%; justify-content:center; }
+      .nav-toggle { display:block; }
+      nav {
+        display:none;
+        flex-direction:column;
+        width:100%;
+        background:rgba(30,30,30,0.98); /* ✅ Pure black background for toggle navbar */
+        position:absolute;
+        top:100%;
+        left:0;
+        z-index:100;
+      }
+      nav.open { display:flex; }
+      nav a {
+        padding:14px 0;
+        border-bottom:1px solid #333;
+        color:#fff;
+        text-align:center;
+      }
+
+      header { flex-direction:row; align-items:center; }
       .hero { flex-direction:column-reverse; align-items:stretch; }
       .hero img, .hero .card { max-width:100%; width:100%; }
       .hero p { font-size: 0.95rem; }
@@ -129,11 +158,17 @@
       .hero p { font-size: 0.9rem; }
     }
 
-    /* Make content transparent like index page */
-    .card, footer, header .brand, nav, .container > *[class] {
+    /* Transparent elements */
+    .card, footer, header .brand, .container > *[class] {
       background: transparent !important;
     }
     * { color: inherit; }
+
+    /* Background */
+    body {
+      background-color: #000000;
+      color: #ffffff;
+    }
   </style>
 </head>
 <body>
@@ -146,6 +181,8 @@
           <p class="tagline">Creative Frontend Studio</p>
         </div>
       </div>
+      <!-- ✅ Nav Toggle Button -->
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleNav()">☰</button>
       <nav>
         <a href="index.html">Home</a>
         <a href="about.html" class="active">About</a>
@@ -158,9 +195,12 @@
     <section class="hero">
       <div class="card">
         <h1>Who We Are</h1>
-        <p class="muted">We are a passionate frontend team crafting visually appealing and performance-driven web solutions. Our focus is on quality design, fast loading, and a smooth user experience.</p> <p> At <strong>NextLayer WebCrafters</strong>, we believe that great design is more than just pixels on a screen — it’s about creating digital experiences that connect, inspire, and perform. We’re a forward-thinking web design and frontend development studio dedicated to crafting clean, responsive, and visually striking websites that help brands stand out in the digital world. </p> <p> Founded with a passion for creativity and code, <strong>NextLayer WebCrafters</strong> started with one simple goal: to help businesses and individuals build a strong and lasting online presence. We blend modern aesthetics with technical precision to deliver web solutions that are not only beautiful but also fast, accessible, and conversion-focused. Every project we take on is built with meticulous attention to detail, ensuring that your website not only looks good but also works seamlessly across all devices and platforms. </p> <p> Our team specializes in creating interactive frontend experiences using cutting-edge technologies like <strong>HTML5</strong>, <strong>CSS3</strong>, <strong>JavaScript</strong>, and responsive frameworks. Whether you’re a startup looking for your first digital footprint or a growing brand aiming to elevate your online presence, we bring your vision to life through creative design and smart coding. </p> <p> What makes us different is our approach. We don’t just design websites — we design <strong>user journeys</strong>. From the first click to the final impression, every color, layout, and animation is carefully chosen to engage your audience and communicate your story effectively. We understand that your website is the face of your business, and we take that responsibility seriously. </p> <p> Over time, <strong>NextLayer WebCrafters</strong> has worked with diverse clients across industries, helping them achieve success with elegant and efficient web solutions. Our process is simple: <em>listen, design, build, and refine</em> — because your satisfaction is our top priority. At the heart of our work lies creativity, collaboration, and commitment to quality. We don’t just build websites; we craft experiences that leave a mark. </p> <p> Let’s build something extraordinary together — welcome to <strong>NextLayer WebCrafters</strong>, where your next layer of success begins. </p>
-
-        <!-- (rest of your paragraphs stay unchanged) -->
+        <p>We are a passionate frontend team crafting visually appealing and performance-driven web solutions. Our focus is on quality design, fast loading, and a smooth user experience.</p>
+        <p>At <strong>NextLayer WebCrafters</strong>, we believe that great design is more than just pixels on a screen — it’s about creating digital experiences that connect, inspire, and perform.</p>
+        <p>Founded with creativity and precision, we build responsive, conversion-focused websites that help brands shine online.</p>
+        <p>Our core expertise spans both frontend and backend development, combining design creativity with technical depth. We specialize in <strong>C#</strong>, <strong>.NET</strong>, <strong>ASP.NET</strong>, <strong>SQL Server</strong>, <strong>WordPress</strong>, <strong>HTML5</strong>, <strong>CSS3</strong>, <strong>JavaScript</strong>, <strong>TypeScript</strong>, <strong>Responsive Design</strong>, <strong>>UI/UX Design</strong>, and <strong>Content Writing</strong> — ensuring each project is functional, fast, and visually captivating.</p>
+        <p>We don’t just design websites — we design <strong>user journeys</strong> that engage and inspire.</p>
+        <p>Let’s build something extraordinary together — welcome to <strong>NextLayer WebCrafters</strong>.</p>
       </div>
       <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600" alt="Team">
     </section>
@@ -171,23 +211,39 @@
     </footer>
   </div>
 
-  <!-- ✅ WhatsApp Floating Button -->
-  <a href="https://wa.me/923132378094" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/923462740115" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
   </a>
 
-  <!-- ✅ WhatsApp Popup -->
+  <!-- WhatsApp Popup -->
   <div id="whatsapp-popup">
     <span>💬 Chat with us on WhatsApp!</span>
     <button onclick="document.getElementById('whatsapp-popup').style.display='none'">×</button>
   </div>
 
   <script>
+    // WhatsApp popup
     window.onload = function() {
       setTimeout(() => {
         document.getElementById('whatsapp-popup').style.display = 'flex';
       }, 800);
     };
+
+    // ✅ Toggle navigation for mobile
+    function toggleNav() {
+      var nav = document.querySelector('nav');
+      nav.classList.toggle('open');
+    }
+
+    // ✅ Close nav on link click (mobile)
+    document.querySelectorAll('nav a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        if (window.innerWidth <= 800) {
+          document.querySelector('nav').classList.remove('open');
+        }
+      });
+    });
   </script>
 </body>
 </html>

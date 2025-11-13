@@ -7,17 +7,69 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="animations.css">
   <link rel="stylesheet" href="contact.css">
+  <style>
+    /* ✅ Toggle Navbar Fix */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: inherit;
+    }
+
+    @media (max-width: 800px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .nav-toggle {
+        display: block;
+        align-self: flex-end;
+      }
+
+      header nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #111;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      header nav.open {
+        display: flex;
+      }
+
+      header nav a {
+        padding: 12px;
+        color: #fff;
+        border-bottom: 1px solid #333;
+        text-align: center;
+      }
+
+      header nav a:last-child {
+        border-bottom: none;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <header>
       <div class="brand">
-       <img src="logo.png" alt="NextLayer WebCrafters Logo" width="60" height="60">
+        <img src="logo.png" alt="NextLayer WebCrafters Logo" width="60" height="60">
         <div>
           <h1>NextLayer WebCrafters</h1>
           <p class="tagline">Creative Frontend Studio</p>
         </div>
       </div>
+
+      <!-- ✅ Toggle button -->
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+
       <nav>
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -31,7 +83,7 @@
       <div class="card">
         <h1>Let's Build Something Amazing!</h1>
         <p class="muted">Reach us directly via WhatsApp or send us your project idea. We respond fast!</p>
-        <a href="https://wa.me/923132378094?text=Hi!%20I%20want%20to%20discuss%20a%20project." class="cta">Message on WhatsApp</a>
+        <a href="https://wa.me/923462740115?text=Hi!%20I%20want%20to%20discuss%20a%20project." class="cta">Message on WhatsApp</a>
       </div>
       <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600" alt="Contact">
     </section>
@@ -42,23 +94,45 @@
     </footer>
   </div>
 
-  <a href="https://wa.me/923132378094" class="whatsapp-float" target="_blank">
+  <a href="https://wa.me/923462740115" class="whatsapp-float" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="34" height="34" alt="WhatsApp">
   </a>
-    <div id="whatsapp-popup" style="position:fixed;right:24px;bottom:90px;background:#fff;color:#222;padding:16px 22px;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,0.18);z-index:999;display:flex;align-items:center;gap:12px;font-size:16px;">
+
+  <div id="whatsapp-popup" style="position:fixed;right:24px;bottom:90px;background:#fff;color:#222;padding:16px 22px;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,0.18);z-index:999;display:flex;align-items:center;gap:12px;font-size:16px;">
     <span>Chat with us on WhatsApp!</span>
     <button onclick="document.getElementById('whatsapp-popup').style.display='none'" style="background:none;border:none;font-size:18px;cursor:pointer;">×</button>
   </div>
+
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.querySelector('header nav');
+
+      toggle.addEventListener('click', () => {
+        nav.classList.toggle('open');
+      });
+
+      // Close nav on link click (mobile)
+      nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 800) {
+            nav.classList.remove('open');
+          }
+        });
+      });
+    });
+
+    // WhatsApp popup
     window.onload = function() {
       document.getElementById('whatsapp-popup').style.display = 'flex';
     };
-    // Responsive adjustment for mobile
+
     if (window.matchMedia("(max-width: 600px)").matches) {
-      document.getElementById('whatsapp-popup').style.right = '12px';
-      document.getElementById('whatsapp-popup').style.bottom = '62px';
-      document.getElementById('whatsapp-popup').style.fontSize = '14px';
-      document.getElementById('whatsapp-popup').style.padding = '10px 14px';
+      const popup = document.getElementById('whatsapp-popup');
+      popup.style.right = '12px';
+      popup.style.bottom = '62px';
+      popup.style.fontSize = '14px';
+      popup.style.padding = '10px 14px';
     }
   </script>
 </body>

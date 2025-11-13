@@ -7,10 +7,9 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="animations.css">
 
-  <!-- Added: lightweight carousel & animation styles -->
   <style>
     /* Container/header entrance */
-    header { animation: slideDown .6s ease both; }
+    header { animation: slideDown .6s ease both; position: relative; } /* added relative */
     @keyframes slideDown { from { transform: translateY(-8px); opacity: 0 } to { transform: none; opacity: 1 } }
 
     /* Carousel layout */
@@ -18,12 +17,7 @@
     .slides-wrapper { overflow: hidden; }
     .slides { display: flex; gap: 18px; transition: transform .5s cubic-bezier(.22,.9,.28,1); will-change: transform; padding: 6px; }
     .slide { min-width: 320px; max-width: 420px; flex: 0 0 auto; background:#fff;border-radius:12px;box-shadow:0 6px 18px rgba(5,10,20,0.08); overflow:hidden; text-decoration:none; color:inherit; transform-origin:center; transition: transform .28s ease, box-shadow .28s ease; }
-    .slide video {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      display: block;
-    }
+    .slide video { width: 100%; height: 180px; object-fit: cover; display: block; }
     .slide h3 { margin:12px 14px 6px; font-size:1.05rem; }
     .slide .muted { margin:0 14px 14px; font-size:.92rem; color:#666; }
 
@@ -47,6 +41,39 @@
     .brand{display:flex;align-items:center;gap:12px}.brand img{width:56px;height:56px;object-fit:cover;border-radius:6px}
     nav{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 
+/* Mobile toggle nav */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: inherit;
+  text-align: right                                                                         ;
+}
+
+@media (max-width: 800px) {
+  .nav-toggle { display: block; }
+
+  nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 12px;
+    background: #111;
+  }
+
+  nav.open { display: flex; }
+
+  nav a {
+    padding: 12px 0;
+    color: #fff;
+    text-align: center;
+    border-bottom: 1px solid #333;
+  }
+}
+
+
     /* Carousel / grid responsiveness */
     .projects-slider{margin:20px 0;overflow:visible}
     .slides-wrapper{overflow:hidden}
@@ -63,7 +90,6 @@
     }
     @media (max-width:800px){
       header{flex-direction:column;align-items:stretch}
-      nav{justify-content:center}
       .projects-slider{margin:16px 0}
       .slides{gap:12px}
       .slide{min-width:80%;max-width:80%}
@@ -89,48 +115,22 @@
     @keyframes popupIn { from { transform: translateY(8px) scale(.98); opacity: 0 } to { transform: none; opacity: 1 } }
     #whatsapp-popup.hide { animation: popupOut .28s ease both; }
     @keyframes popupOut { from { opacity:1; transform:none } to { opacity:0; transform: translateY(8px) scale(.98) } }
-
-    /* Header / nav responsive */
-    header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0; }
-    .brand { display:flex; align-items:center; gap:12px; }
-    .brand img { width:56px; height:56px; object-fit:cover; border-radius:6px; }
-    nav { display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
-
-    /* Support video inside slide */
-    .slide img, .slide video { width:100%; height:180px; object-fit:cover; display:block; }
-    @media (max-width:900px) {
-      .slide { min-width:280px; max-width:340px; }
-      .slide img, .slide video { height:150px; }
-    }
-    @media (max-width:600px) {
-      .slider-btn { width:36px; height:36px; }
-      .slide { min-width:88%; max-width:88%; }
-    }
-
-    /* Make body components stack on small screens */
-    @media (max-width:800px) {
-      header { flex-direction:column; align-items:stretch; }
-      nav { justify-content:center; }
-      .projects-slider { margin:18px 0 32px; }
-      .slides { gap:12px; padding:6px; }
-      .slides-wrapper { padding-bottom:6px; }
-      .slide img, .slide video { height:160px; }
-    }
-    @media (max-width:420px) {
-      .slide img, .slide video { height:140px; }
-    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <div class="brand">
-       <img src="logo.png" alt="NextLayer WebCrafters Logo" width="60" height="60">
+        <img src="logo.png" alt="NextLayer WebCrafters Logo" width="60" height="60">
         <div>
           <h1>NextLayer WebCrafters</h1>
           <p class="tagline">Creative Frontend Studio</p>
         </div>
       </div>
+
+      <!-- Mobile toggle button -->
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+
       <nav>
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -142,7 +142,6 @@
 
     <h1>Our Recent Front-end But Still Proper Working Projects</h1>
 
-    <!-- Replaced: original .projects grid with a slider -->
     <div class="projects-slider" aria-label="Project carousel">
       <button class="slider-btn prev" aria-label="Previous project">‹</button>
       <div class="slides-wrapper" tabindex="0">
@@ -155,7 +154,6 @@
             <h3>NextLayer WebCrafters - GlowAura</h3>
             <p class="muted">GlowAura — where beauty meets confidence through premium, skin-loving cosmetic essentials.</p>
           </div>
-
           <!-- Slide 2 -->
           <div class="slide">
             <video autoplay loop muted playsinline>
@@ -164,7 +162,6 @@
             <h3>NextLayer WebCrafters - GrowthNest</h3>
             <p class="muted">GrowthNest — your one-stop destination for smart, stylish, and affordable online shopping.</p>
           </div>
-
           <!-- Slide 3 -->
           <div class="slide">
             <video autoplay loop muted playsinline>
@@ -173,7 +170,6 @@
             <h3>NextLayer WebCrafters - Landing Page</h3>
             <p class="muted">NextLayer WebCrafters — transforming ideas into stunning, high-performing digital experiences.</p>
           </div>
-
           <!-- Slide 4 -->
           <div class="slide">
             <video autoplay loop muted playsinline>
@@ -182,8 +178,7 @@
             <h3>NextLayer WebCrafters - PrimeCart</h3>
             <p class="muted">PrimeCart — delivering quality products and seamless shopping right to your doorstep.</p>
           </div>
-
-           <!-- Slide 5 -->
+          <!-- Slide 5 -->
           <div class="slide">
             <video autoplay loop muted playsinline>
               <source src="GTA.mp4" type="video/mp4">
@@ -195,7 +190,6 @@ Built with a clean UI, optimized performance, and a seamless user experience for
         </div>
       </div>
       <button class="slider-btn next" aria-label="Next project">›</button>
-
       <div class="dots" aria-hidden="false"></div>
     </div>
 
@@ -205,8 +199,7 @@ Built with a clean UI, optimized performance, and a seamless user experience for
     </footer>
   </div>
 
-  <!-- ...existing WhatsApp markup ... -->
-  <a href="https://wa.me/923132378094" class="whatsapp-float" target="_blank">
+  <a href="https://wa.me/923462740115" class="whatsapp-float" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="34" height="34" alt="WhatsApp">
   </a>
   <div id="whatsapp-popup" style="position:fixed;right:24px;bottom:90px;background:#fff;color:#222;padding:16px 22px;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,0.18);z-index:999;display:flex;align-items:center;gap:12px;font-size:16px;">
@@ -214,10 +207,33 @@ Built with a clean UI, optimized performance, and a seamless user experience for
     <button id="whatsapp-close" style="background:none;border:none;font-size:18px;cursor:pointer;">×</button>
   </div>
 
-  <!-- Replaced: old inline script with unified carousel + popup script -->
   <script>
+    // Navbar toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.querySelector('header nav');
+
+      toggle.addEventListener('click', () => {
+        nav.classList.toggle('open');
+      });
+
+      nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 800) nav.classList.remove('open');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 800 && nav.classList.contains('open')) {
+          if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+            nav.classList.remove('open');
+          }
+        }
+      });
+    });
+
+    // Slider script (unchanged)
     (function(){
-      // Elements
       const slider = document.querySelector('.projects-slider');
       if (!slider) return;
       const slidesEl = slider.querySelector('.slides');
@@ -225,20 +241,15 @@ Built with a clean UI, optimized performance, and a seamless user experience for
       const prevBtn = slider.querySelector('.slider-btn.prev');
       const nextBtn = slider.querySelector('.slider-btn.next');
       const dotsWrap = slider.querySelector('.dots');
-
-      // State
       let index = 0;
-
-      // Build dots as indicators only (non-clickable)
       slides.forEach((_, i) => {
         const d = document.createElement('button');
         d.className = 'dot';
         d.setAttribute('aria-label', 'Slide ' + (i + 1));
-        d.disabled = true; // make non-interactive so navigation only occurs via buttons
+        d.disabled = true;
         dotsWrap.appendChild(d);
       });
       const dots = Array.from(dotsWrap.children);
-
       function update() {
         if (!slides[0]) return;
         const gap = parseFloat(getComputedStyle(slidesEl).gap) || 18;
@@ -247,62 +258,32 @@ Built with a clean UI, optimized performance, and a seamless user experience for
         slidesEl.style.transform = `translateX(${-offset}px)`;
         dots.forEach((d, i) => d.classList.toggle('active', i === index));
       }
-
-      function goTo(i) {
-        index = Math.max(0, Math.min(i, slides.length - 1));
-        update();
-      }
-
+      function goTo(i) { index = Math.max(0, Math.min(i, slides.length - 1)); update(); }
       function next() { goTo((index + 1) % slides.length); }
       function prev() { goTo((index - 1 + slides.length) % slides.length); }
-
-      // Only allow button clicks to navigate
       if (prevBtn) prevBtn.addEventListener('click', prev);
       if (nextBtn) nextBtn.addEventListener('click', next);
-
-      // Initial setup
       window.addEventListener('load', () => { index = 0; update(); });
       window.addEventListener('resize', update);
     })();
-  </script>
 
-  <!-- Play videos only on hover/focus; tap toggles on touch devices. -->
-  <script>
+    // Video play hover/tap script (unchanged)
     (function(){
       const videos = document.querySelectorAll('.projects-slider video, .projects .project video, .slide video');
       if (!videos.length) return;
-
       videos.forEach((v) => {
-        // Ensure muted and inline play so browsers allow programmatic play
         try { v.muted = true; } catch(e){}
         v.playsInline = true;
         v.removeAttribute && v.removeAttribute('autoplay');
         v.pause && v.pause();
-
-        // Pointer events (covers mouse and pen)
-        v.addEventListener('pointerenter', () => {
-          // only react to actual pointer (not synthetic)
-          v.play().catch(()=>{ /* ignore play errors */ });
-        });
-        v.addEventListener('pointerleave', () => {
-          if (!v.paused) {
-            v.pause();
-            v.currentTime = 0;
-          }
-        });
-
-        // Keyboard accessibility
+        v.addEventListener('pointerenter', () => { v.play().catch(()=>{}); });
+        v.addEventListener('pointerleave', () => { if (!v.paused) { v.pause(); v.currentTime = 0; } });
         v.setAttribute('tabindex', v.getAttribute('tabindex') || '0');
         v.addEventListener('focus', () => v.play().catch(()=>{}));
         v.addEventListener('blur', () => { v.pause(); v.currentTime = 0; });
-
-        // Touch: toggle play/pause on tap for devices that lack hover
         v.addEventListener('click', (e) => {
           const hasHover = window.matchMedia && window.matchMedia('(hover: hover)').matches;
-          if (!hasHover) {
-            if (v.paused) v.play().catch(()=>{});
-            else { v.pause(); v.currentTime = 0; }
-          }
+          if (!hasHover) { if (v.paused) v.play().catch(()=>{}); else { v.pause(); v.currentTime = 0; } }
         });
       });
     })();
